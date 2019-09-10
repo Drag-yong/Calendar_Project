@@ -107,7 +107,7 @@ public class CalendarPrinter {
             return 31;
         } else if (monthIndex == 1) { // check if it is February
             if (isLeapYear) // check if it is a leap year or not
-                return 29; // because of leap year
+                return 29; // because of the leap year
             else
                 return 28;
         } else {
@@ -129,7 +129,7 @@ public class CalendarPrinter {
      */
     public static int getFirstDayOfWeekInMonth(String month, String year) {
         // Note implementation tips in Appendix I below.
-        int q = getNumberOfDaysInMonth(month, year); // Day of the month
+        int q = 1; // First day
 
         int m; // The number of days in the month,  3 = March, 4 = April, 5 = May, ..., 14 = February
         int checkMonthIndex = getMonthIndex(month);
@@ -141,11 +141,11 @@ public class CalendarPrinter {
         int k = getYearWithinCentury(year); // the year of the century
         int j = getCentury(year); // the zero based century
 
-        System.out.printf("q=%d, m=%d, k=%d, j=%d%n", q, m, k, j);
+        System.out.printf("m=%d, k=%d, j=%d%n", m, k, j);
 
         int daysOfTheWeek = (q + Math.floorDiv(13 * (m + 1), 5) + k + Math.floorDiv(k, 4) + Math.floorDiv(j, 4) + 5 * j) % 7;
         // 0 = Saturday, 1 = Sunday, 2 = Monday, ..., 6 = Friday
-        return daysOfTheWeek;
+        return (daysOfTheWeek + 5) % 7; // 5 = Sat, 6 = Sun, 0 = Mon, ...
     }
 
     /**
@@ -159,8 +159,13 @@ public class CalendarPrinter {
      * 2019 should look as follows, where each horizontal row is stored in different
      * array within the 2d result:
      * <p>
-     * MON TUE WED THU FRI SAT SUN . . . . . . 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
-     * 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 . . . . . .
+     * MON TUE WED THU FRI SAT SUN
+     *  .   .   .   .   .   .   1
+     *  2   3   4   5   6   7   8
+     *  9   10  11  12  13  14  15
+     *  16  17  18  19  20  21  22
+     *  23  24  25  26  27  28  29
+     *  30  .   .   .   .   .   .
      *
      * @param month which may or may not be abbreviated to 3 or more characters
      * @param year  of month generate calendar for (Gregorian Calendar AD) String
@@ -168,16 +173,64 @@ public class CalendarPrinter {
      * @return 2d array of strings depicting the contents of a calendar
      */
     public static String[][] generateCalendar(String month, String year) {
-        return null;
+        int firstDate = getFirstDayOfWeekInMonth(month, year);
+        int lastDay = getNumberOfDaysInMonth(month, year);
+
+        String[][] calendar;
+        if (firstDate > 5/*Only Sunday*/ && lastDay >= 30) {
+            calendar = new String[7][7];
+        } else if (firstDate > 4/*Saturday*/ && lastDay >= 31) {
+            calendar = new String[7][7];
+        } else if(!getIsLeapYear(year) && getMonthIndex(month) == 1 && firstDate == 0) { // Not leap year, February, started from monday
+            calendar = new String[5][7];
+        } else {
+            calendar = new String[6][7];
+        }
+
+        for (int i = 0; i < DAYS_OF_WEEK.length; i++) {
+            calendar[0][i] = DAYS_OF_WEEK[i];
+        }
+        int days = 1;
+        for (int i = 1; i < calendar.length; i++) {
+            for (int j = 0; j < calendar[0].length; j++){
+                if (i == 1 && j < firstDate) { // before the day 1
+                    calendar[i][j] = ".";
+                } else if (days > getNumberOfDaysInMonth(month, year)) { // after the max day i.e. after 31
+                    calendar[i][j] = ".";
+                } else {
+                    calendar[i][j] = "" + days;
+                    days++;
+                }
+            }
+        }
+        return calendar;
     }
 
     public static void main(String[] args) {
-        System.out.println(getFirstDayOfWeekInMonth("September", "2019"));
-        System.out.println(getFirstDayOfWeekInMonth("August", "2019"));
-        System.out.println(getFirstDayOfWeekInMonth("October", "2019"));
-        System.out.println(getFirstDayOfWeekInMonth("November", "2019"));
-        System.out.println(getFirstDayOfWeekInMonth("December", "2019"));
-        System.out.println(getFirstDayOfWeekInMonth("January", "2019"));
-        System.out.println(getFirstDayOfWeekInMonth("March", "2019"));
+//        System.out.println(getFirstDayOfWeekInMonth("September", "2019"));
+//        System.out.println(getFirstDayOfWeekInMonth("August", "2019"));
+//        System.out.println(getFirstDayOfWeekInMonth("October", "2019"));
+//        System.out.println(getFirstDayOfWeekInMonth("November", "2019"));
+//        System.out.println(getFirstDayOfWeekInMonth("December", "2019"));
+//        System.out.println(getFirstDayOfWeekInMonth("January", "2019"));
+//        System.out.println(getFirstDayOfWeekInMonth("March", "2019"));
+        System.out.println(getFirstDayOfWeekInMonth("January", "2000"));
+        System.out.println(getFirstDayOfWeekInMonth("January", "2020"));
+
+        String[][] output = generateCalendar("January", "2020");
+        for (int i = 0; i < output.length; i++) {
+            for (int j = 0; j < output[0].length; j++) {
+                System.out.print(output[i][j] + "  ");
+            }
+            System.out.println();
+        }
+//
+//        String[][] output2 = generateCalendar("February", "2019");
+//        for (int i = 0; i < output2.length; i++) {
+//            for (int j = 0; j < output2[0].length; j++) {
+//                System.out.print(output2[i][j] + "  ");
+//            }
+//            System.out.println();
+//        }
     }
 }

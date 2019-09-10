@@ -99,6 +99,10 @@ public class CalendarTester {
             System.out.println("The index of \"MARCH\" is 2");
             output = false;
         }
+        if (CalendarPrinter.getMonthIndex("Something String") != -1) {
+            System.out.println("\"Something String\" is not a part of months!");
+            output = false;
+        }
 
         if (output)
             System.out.println("testGetMonthIndex() passed.");
@@ -110,17 +114,23 @@ public class CalendarTester {
 
     public static boolean testGetNumberOfDaysInMonth() {
         boolean output = true;
+        int a = CalendarPrinter.getNumberOfDaysInMonth("February", "2020");
+        int b = CalendarPrinter.getNumberOfDaysInMonth("April", "2019");
+        int c = CalendarPrinter.getNumberOfDaysInMonth("December", "2018");
 
-        if (CalendarPrinter.getNumberOfDaysInMonth("February", "2020") != 29) {
+        if (a != 29) {
             System.out.println("The days of February in 2020 is 29");
+            System.out.println("I got: " + a);
             output = false;
         }
-        if (CalendarPrinter.getNumberOfDaysInMonth("April", "2019") != 30) {
+        if (b != 30) {
             System.out.println("The days of April in 2019 is 30");
+            System.out.println("I got: " + b);
             output = false;
         }
-        if (CalendarPrinter.getNumberOfDaysInMonth("December", "2018") != 31) {
+        if (c != 31) {
             System.out.println("The days of December in 2019 is 31");
+            System.out.println("I got:" + c);
             output = false;
         }
 
@@ -134,7 +144,41 @@ public class CalendarTester {
 
     public static boolean testGetFirstDayOfWeekInMonth() {
         boolean output = true;
+        int a = CalendarPrinter.getFirstDayOfWeekInMonth("September", "2019");
+        int b = CalendarPrinter.getFirstDayOfWeekInMonth("January", "2000");
+        int c = CalendarPrinter.getFirstDayOfWeekInMonth("January", "2020");
 
+        if (a != 6) {
+            System.out.println("September 1, 2019 is Sunday, 6");
+            System.out.println("I got: " + a);
+            output = false;
+        }
+        if (b != 5) {
+            System.out.println("January 1, 2000 is Saturday, 5");
+            System.out.println("I got: " + b);
+            output = false;
+        }
+        if (c != 2) {
+            System.out.println("January 1, 2020 is Wednesday, 2");
+            System.out.println("I got :" + c);
+            output = false;
+        }
+
+        if (output)
+            System.out.println("testGetFirstDayOfWeekInMonth() passed.");
+        else
+            System.out.println("testGetFirstDayOfWeekInMonth() failed.");
+
+        return output;
+    }
+
+    public static boolean testGenerateCalendar() {
+        boolean output = true;
+
+        if (output)
+            System.out.println("testGenerateCalendar() passed.");
+        else
+            System.out.println("testGenerateCalendar() failed.");
 
         return output;
     }
@@ -145,8 +189,12 @@ public class CalendarTester {
         boolean c = testGetIsLeapYear();
         boolean d = testGetNumberOfDaysInMonth();
         boolean e = testGetFirstDayOfWeekInMonth();
+        boolean f = testGenerateCalendar();
+        boolean g = testGetMonthIndex();
 
-        if (a && b && c && d && e)
+        if (a && b && c && d && e && f && g)
             System.out.println("All tests passed!");
+        else
+            System.out.println("Good luck! You can pass all the tests!");
     }
 }
