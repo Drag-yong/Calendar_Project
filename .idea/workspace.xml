@@ -73,7 +73,14 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.CalendarPrinter">
+    <configuration name="CalendarPrinter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="CalendarPrinter" />
+      <module name="Calendar_Project" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CalendarTester" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="CalendarTester" />
       <module name="Calendar_Project" />
@@ -83,6 +90,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.CalendarPrinter" />
         <item itemvalue="Application.CalendarTester" />
       </list>
     </recent_temporary>
@@ -100,6 +108,8 @@
       <workItem from="1567945459241" duration="176000" />
       <workItem from="1568030580917" duration="9780000" />
       <workItem from="1568043146734" duration="72000" />
+      <workItem from="1568073054067" duration="8038000" />
+      <workItem from="1568083734363" duration="7000" />
     </task>
     <servers />
   </component>
@@ -111,7 +121,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
