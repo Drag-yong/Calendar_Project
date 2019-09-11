@@ -1,5 +1,3 @@
-import java.util.Calendar;
-
 public class CalendarTester {
     public static boolean testGetCentury() {
         boolean output = true;
@@ -71,6 +69,10 @@ public class CalendarTester {
             System.out.println("2000 is a leap year");
             output = false;
         }
+        if (CalendarPrinter.getIsLeapYear("2019")) {
+            System.out.println("2019 is not a leap year");
+            output = false;
+        }
 
         if (output)
             System.out.println("testGetIsLeapYear() passed.");
@@ -117,6 +119,8 @@ public class CalendarTester {
         int a = CalendarPrinter.getNumberOfDaysInMonth("February", "2020");
         int b = CalendarPrinter.getNumberOfDaysInMonth("April", "2019");
         int c = CalendarPrinter.getNumberOfDaysInMonth("December", "2018");
+        int d = CalendarPrinter.getNumberOfDaysInMonth("January", "2000");
+        int e = CalendarPrinter.getNumberOfDaysInMonth("January", "2020");
 
         if (a != 29) {
             System.out.println("The days of February in 2020 is 29");
@@ -132,6 +136,15 @@ public class CalendarTester {
             System.out.println("The days of December in 2019 is 31");
             System.out.println("I got:" + c);
             output = false;
+        }
+        if (d != 31) {
+            System.out.println("The days of January in 2000 is 31");
+            System.out.println("I got: " + d);
+            output = false;
+        }
+        if (e != 31) {
+            System.out.println("The days of January in 2000 is 31");
+            System.out.println("I got: " + e);
         }
 
         if (output)
@@ -174,6 +187,67 @@ public class CalendarTester {
 
     public static boolean testGenerateCalendar() {
         boolean output = true;
+        String[] days = { "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN" };
+
+        String[][] calendar1 = new String[7][7]; // January 2000
+        String[][] calendar2 = new String[6][7]; // February 2020
+        String[][] calendar3 = new String[7][7]; // September 2019
+
+        for (int i = 0; i < days.length; i++) { // fill the first line of three calendars
+            calendar1[0][i] = days[i];
+            calendar2[0][i] = days[i];
+            calendar3[0][i] = days[i];
+        }
+
+        int daysFor1 = 1; // for calendar1, it will fill all the days inside the calendar1.
+        int daysFor2 = 1; // for calendar2, same as daysFor1.
+        int daysFor3 = 1; // for calendar3, same as daysFor1.
+
+        for (int i = 1; i < 7; i++) { // Calendar for January 2000
+            for (int j = 0; j < 7; j++) {
+                if ((i == 1 && j < 5) || daysFor1 > 31) {
+                    calendar1[i][j] = ".";
+                } else {
+                    calendar1[i][j] = "" + daysFor1;
+                    daysFor1++;
+                }
+            }
+        }
+
+        for (int i = 1; i < 6; i++) { // Calendar for February 2020
+            for (int j = 0; j < 7; j++) {
+                if (i == 1 && j < 5) {
+                    calendar2[i][j] = ".";
+                } else {
+                    calendar2[i][j] = "" + daysFor2;
+                    daysFor2++;
+                }
+            }
+        }
+
+        for (int i = 1; i < 7; i++) { // Calendar for September 2019
+            for (int j = 0; j < 7; j++) {
+                if ((i == 1 && j < 6) || daysFor3 > 30) {
+                    calendar3[i][j] = ".";
+                } else {
+                    calendar3[i][j] = "" + daysFor3;
+                    daysFor3++;
+                }
+            }
+        }
+
+        if (checkEqualCalendars(CalendarPrinter.generateCalendar("January", "2000"), calendar1)) {
+            System.out.println("You created the wrong calendar for January 2000. This is the right calendar");
+            output = printCalendar(calendar1);
+        }
+        if (checkEqualCalendars(CalendarPrinter.generateCalendar("February", "2020"), calendar2)) {
+            System.out.println("You created the wrong calendar for February 2020. This is the right calendar");
+            output = printCalendar(calendar2);
+        }
+        if (checkEqualCalendars(CalendarPrinter.generateCalendar("September", "2019"), calendar3)) {
+            System.out.println("You created the wrong calendar for September 2019. This is the right calendar");
+            output = printCalendar(calendar3);
+        }
 
         if (output)
             System.out.println("testGenerateCalendar() passed.");
@@ -183,14 +257,49 @@ public class CalendarTester {
         return output;
     }
 
+    //////////////////
+    //private method//
+    //////////////////
+
+    private static boolean printCalendar(String[][] calendar) {
+        for (int i = 0; i < calendar.length; i++) {
+            for (int j = 0; j < calendar[0].length; j++) {
+                System.out.print(calendar[i][j] + "  ");
+            }
+            System.out.println();
+        }
+        return false;
+    }
+
+    private static boolean checkEqualCalendars(String[][] calendar1, String[][] calendar2) {
+        if (calendar1.length != calendar2.length || calendar1[0].length != calendar2[0].length)
+            return false;
+
+        for (int i = 0; i < calendar1.length; i++) {
+            for (int j = 0; j < calendar1[0].length; j++) {
+                if (!calendar1[i][j].equals(calendar2[i][j])) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         boolean a = testGetCentury();
+        System.out.println();
         boolean b = testGetYearWithinMonth();
+        System.out.println();
         boolean c = testGetIsLeapYear();
-        boolean d = testGetNumberOfDaysInMonth();
-        boolean e = testGetFirstDayOfWeekInMonth();
-        boolean f = testGenerateCalendar();
-        boolean g = testGetMonthIndex();
+        System.out.println();
+        boolean d = testGetMonthIndex();
+        System.out.println();
+        boolean e = testGetNumberOfDaysInMonth();
+        System.out.println();
+        boolean f = testGetFirstDayOfWeekInMonth();
+        System.out.println();
+        boolean g = testGenerateCalendar();
+        System.out.println();
 
         if (a && b && c && d && e && f && g)
             System.out.println("All tests passed!");

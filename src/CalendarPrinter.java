@@ -141,7 +141,7 @@ public class CalendarPrinter {
         int k = getYearWithinCentury(year); // the year of the century (year % 100)
         int j = getCentury(year); // the zero based century (year / 100)
 
-        System.out.printf("m=%d, k=%d, j=%d%n", m, k, j);
+//        System.out.printf("m=%d, k=%d, j=%d%n", m, k, j);
 
         int daysOfTheWeek = (q + Math.floorDiv(13 * (m + 1), 5) + k + Math.floorDiv(k, 4) + Math.floorDiv(j, 4) + 5 * j) % 7;
         // 0 = Saturday, 1 = Sunday, 2 = Monday, ..., 6 = Friday
@@ -187,7 +187,7 @@ public class CalendarPrinter {
             calendar = new String[6][7];
         }
 
-        for (int i = 0; i < DAYS_OF_WEEK.length; i++) {
+        for (int i = 0; i < DAYS_OF_WEEK.length; i++) { // fill the first line
             calendar[0][i] = DAYS_OF_WEEK[i];
         }
         int days = 1;
@@ -207,7 +207,7 @@ public class CalendarPrinter {
     }
 
     public static void main(String[] args) {
-//        System.out.println(getFirstDayOfWeekInMonth("September", "2019"));
+        System.out.println(getFirstDayOfWeekInMonth("September", "2019"));
 //        System.out.println(getFirstDayOfWeekInMonth("August", "2019"));
 //        System.out.println(getFirstDayOfWeekInMonth("October", "2019"));
 //        System.out.println(getFirstDayOfWeekInMonth("November", "2019"));
@@ -218,14 +218,13 @@ public class CalendarPrinter {
 //        System.out.println(getFirstDayOfWeekInMonth("January", "2020"));
 //        System.out.println(getFirstDayOfWeekInMonth("February", "2020"));
 
-        String[][] output = generateCalendar("February", "2020");
-        for (int i = 0; i < output.length; i++) {
-            for (int j = 0; j < output[0].length; j++) {
-                System.out.print(output[i][j] + "  ");
-            }
-            System.out.println();
-        }
-//
+//        String[][] output = generateCalendar("February", "2020");
+//        for (int i = 0; i < output.length; i++) {
+//            for (int j = 0; j < output[0].length; j++) {
+//                System.out.print(output[i][j] + "  ");
+//            }
+//            System.out.println();
+//        }
 //        String[][] output2 = generateCalendar("February", "2019");
 //        for (int i = 0; i < output2.length; i++) {
 //            for (int j = 0; j < output2[0].length; j++) {
@@ -233,5 +232,12 @@ public class CalendarPrinter {
 //            }
 //            System.out.println();
 //        }
+        String[][] output3 = generateCalendar("September", "2019");
+        for (int i = 0; i < output3.length; i++) {
+            for (int j = 0; j < output3[0].length; j++) {
+                System.out.print(output3[i][j] + "  ");
+            }
+            System.out.println();
+        }
     }
 }

@@ -52,6 +52,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -59,6 +60,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -72,7 +74,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.CalendarPrinter">
+  <component name="RunManager" selected="Application.CalendarTester">
     <configuration name="CalendarPrinter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="CalendarPrinter" />
       <module name="Calendar_Project" />
@@ -89,8 +91,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.CalendarPrinter" />
         <item itemvalue="Application.CalendarTester" />
+        <item itemvalue="Application.CalendarPrinter" />
       </list>
     </recent_temporary>
   </component>
@@ -112,6 +114,7 @@
       <workItem from="1568101669690" duration="2607000" />
       <workItem from="1568112302805" duration="13250000" />
       <workItem from="1568129665586" duration="3166000" />
+      <workItem from="1568168045628" duration="8851000" />
     </task>
     <servers />
   </component>
