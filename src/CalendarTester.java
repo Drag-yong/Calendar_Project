@@ -236,15 +236,15 @@ public class CalendarTester {
             }
         }
 
-        if (checkEqualCalendars(CalendarPrinter.generateCalendar("January", "2000"), calendar1)) {
+        if (!checkEqualCalendars(CalendarPrinter.generateCalendar("January", "2000"), calendar1)) {
             System.out.println("You created the wrong calendar for January 2000. This is the right calendar");
             output = printCalendar(calendar1);
         }
-        if (checkEqualCalendars(CalendarPrinter.generateCalendar("February", "2020"), calendar2)) {
+        if (!checkEqualCalendars(CalendarPrinter.generateCalendar("February", "2020"), calendar2)) {
             System.out.println("You created the wrong calendar for February 2020. This is the right calendar");
             output = printCalendar(calendar2);
         }
-        if (checkEqualCalendars(CalendarPrinter.generateCalendar("September", "2019"), calendar3)) {
+        if (!checkEqualCalendars(CalendarPrinter.generateCalendar("September", "2019"), calendar3)) {
             System.out.println("You created the wrong calendar for September 2019. This is the right calendar");
             output = printCalendar(calendar3);
         }
