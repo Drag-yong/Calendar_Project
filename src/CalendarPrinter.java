@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class CalendarPrinter {
     private final static String[] DAYS_OF_WEEK = {"MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"};
     private final static String[] MONTHS_OF_YEAR = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP",
@@ -129,22 +131,32 @@ public class CalendarPrinter {
      */
     public static int getFirstDayOfWeekInMonth(String month, String year) {
         // Note implementation tips in Appendix I below.
+        int yearInt = Integer.parseInt(year);
         int q = 1; // First day
 
         int m; // The number of days in the month,  3 = March, 4 = April, 5 = May, ..., 14 = February
         int checkMonthIndex = getMonthIndex(month);
-        if (checkMonthIndex < 2)
+        if (checkMonthIndex < 2) {
             m = checkMonthIndex + 13; // January = 13, February = 14
+            yearInt--; // For January and February, we need to check the previous year
+        }
         else
-            m = checkMonthIndex + 1; // March = 3, April = 4, ...
+            m = checkMonthIndex + 1; // March = 3, April = 4, ..., December = 12
 
-        int k = getYearWithinCentury(year); // the year of the century (year % 100)
-        int j = getCentury(year); // the zero based century (year / 100)
+        int k = getYearWithinCentury("" + yearInt); // the year of the century (year % 100)
+        int j = getCentury("" + yearInt); // the zero based century (year / 100)
 
 //        System.out.printf("m=%d, k=%d, j=%d%n", m, k, j);
 
+//        int daysOfTheWeek; // 0 = Saturday, 1 = Sunday, 2 = Monday, ..., 6 = Friday
+//        if (m < 13) // March to December
+//            daysOfTheWeek = (q + Math.floorDiv(13 * (m + 1), 5) + k + Math.floorDiv(k, 4) + Math.floorDiv(j, 4) + 5 * j) % 7;
+//        else // January and February
+//            daysOfTheWeek = (q + Math.floorDiv(13 * (m + 1), 5) + k - 1 + Math.floorDiv(k - 1, 4) + Math.floorDiv(j, 4) + 5 * j) % 7;
+
         int daysOfTheWeek = (q + Math.floorDiv(13 * (m + 1), 5) + k + Math.floorDiv(k, 4) + Math.floorDiv(j, 4) + 5 * j) % 7;
         // 0 = Saturday, 1 = Sunday, 2 = Monday, ..., 6 = Friday
+
         return (daysOfTheWeek + 5) % 7; // 5 = Sat, 6 = Sun, 0 = Mon, ...
     }
 
@@ -207,37 +219,27 @@ public class CalendarPrinter {
     }
 
     public static void main(String[] args) {
-//        System.out.println(getFirstDayOfWeekInMonth("September", "2019"));
-//        System.out.println(getFirstDayOfWeekInMonth("August", "2019"));
-//        System.out.println(getFirstDayOfWeekInMonth("October", "2019"));
-//        System.out.println(getFirstDayOfWeekInMonth("November", "2019"));
-//        System.out.println(getFirstDayOfWeekInMonth("December", "2019"));
-//        System.out.println(getFirstDayOfWeekInMonth("January", "2019"));
-//        System.out.println(getFirstDayOfWeekInMonth("March", "2019"));
-        System.out.println(getFirstDayOfWeekInMonth("January", "2000")); // 0
-        System.out.println(getFirstDayOfWeekInMonth("January", "2020")); // 4
-        System.out.println(getFirstDayOfWeekInMonth("February", "2020")); // 0
+        Scanner sc = new Scanner(System.in);
 
-//        String[][] output = generateCalendar("February", "2020");
-//        for (int i = 0; i < output.length; i++) {
-//            for (int j = 0; j < output[0].length; j++) {
-//                System.out.print(output[i][j] + "  ");
-//            }
-//            System.out.println();
-//        }
-//        String[][] output2 = generateCalendar("February", "2019");
-//        for (int i = 0; i < output2.length; i++) {
-//            for (int j = 0; j < output2[0].length; j++) {
-//                System.out.print(output2[i][j] + "  ");
-//            }
-//            System.out.println();
-//        }
-//        String[][] output3 = generateCalendar("September", "2019");
-//        for (int i = 0; i < output3.length; i++) {
-//            for (int j = 0; j < output3[0].length; j++) {
-//                System.out.print(output3[i][j] + "  ");
-//            }
-//            System.out.println();
-//        }
+        System.out.println("Welcome to the Calendar Printer.");
+        System.out.println("================================");
+        System.out.println("Enter the month to print: ");
+        String month = sc.next();
+        System.out.println("Enter the year to print: ");
+        String year = sc.next();
+        String[][] calendar = generateCalendar(month, year);
+
+        for (int i = 0; i < calendar.length; i++) {
+            for (int j = 0; j < calendar[0].length; j++) {
+                if (calendar[i][j].length() == 1) {
+                    System.out.printf(" %s  ", calendar[i][j]);
+                } else if (calendar[i][j].length() == 2) {
+                    System.out.printf(" %s ", calendar[i][j]);
+                } else {
+                    System.out.printf("%s ", calendar[i][j]);
+                }
+            }
+            System.out.println();
+        }
     }
 }

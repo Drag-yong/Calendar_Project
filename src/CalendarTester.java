@@ -23,7 +23,7 @@ public class CalendarTester {
         return output;
     }
 
-    public static boolean testGetYearWithinMonth() {
+    public static boolean testGetYearWithinCentury() {
         boolean output = true;
 
         if (CalendarPrinter.getYearWithinCentury("23") != 23) {
@@ -216,7 +216,7 @@ public class CalendarTester {
 
         for (int i = 1; i < 6; i++) { // Calendar for February 2020
             for (int j = 0; j < 7; j++) {
-                if (i == 1 && j < 5) {
+                if ((i == 1 && j < 5) || daysFor2 > 29) {
                     calendar2[i][j] = ".";
                 } else {
                     calendar2[i][j] = "" + daysFor2;
@@ -288,7 +288,7 @@ public class CalendarTester {
     public static void main(String[] args) {
         boolean a = testGetCentury();
         System.out.println();
-        boolean b = testGetYearWithinMonth();
+        boolean b = testGetYearWithinCentury();
         System.out.println();
         boolean c = testGetIsLeapYear();
         System.out.println();
