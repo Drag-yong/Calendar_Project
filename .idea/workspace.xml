@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0d42597d-2ffb-48de-a132-6cd4ea231dcd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Calendar_Project/CalendarPrinter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Calendar_Project/CalendarPrinter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Calendar_Project/CalendarTester.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Calendar_Project/CalendarTester.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CalendarPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CalendarPrinter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CalendarTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CalendarTester.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -119,6 +116,9 @@
       <workItem from="1568168045628" duration="8851000" />
       <workItem from="1568185349474" duration="1435000" />
       <workItem from="1568200034161" duration="5284000" />
+      <workItem from="1568205543724" duration="16000" />
+      <workItem from="1568434659913" duration="187000" />
+      <workItem from="1568598075750" duration="43000" />
     </task>
     <servers />
   </component>
